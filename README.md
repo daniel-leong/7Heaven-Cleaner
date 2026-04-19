@@ -24,8 +24,8 @@ A comprehensive bash script for automated Linux system cleanup with detailed dis
 
 ```bash
 # Download the script
-wget https://github.com/daniel-leong/7Heaven-Cleaner.git
-cd 7Heaven-Cleaner
+wget https://github.com/daniel-leong/7Heaven-Cleaner/archive/refs/heads/main.zip && unzip main && rm main.zip
+cd 7Heaven-Cleaner-main
 
 # Make it executable
 chmod +x cleanup.sh
