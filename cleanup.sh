@@ -69,17 +69,17 @@ else
     echo "  - supervisor log not found, skipping"
 fi
 
-echo "Truncating rclone log..."
-if [ -f /var/log/rclone_UNGG.log ]; then
-    RCLONE_SIZE=$(sudo du -sh /var/log/rclone_UNGG.log | cut -f1)
-    echo "  - rclone log size before: $RCLONE_SIZE"
-    sudo truncate -s 0 /var/log/rclone_UNGG.log
-    echo "  - rclone log truncated ✅"
-else
-    echo "  - rclone log not found, skipping"
-fi
-echo "✅ Log truncation completed"
-echo ""
+# echo "Truncating rclone log..."
+# if [ -f /var/log/rclone_UNGG.log ]; then
+#     RCLONE_SIZE=$(sudo du -sh /var/log/rclone_UNGG.log | cut -f1)
+#     echo "  - rclone log size before: $RCLONE_SIZE"
+#     sudo truncate -s 0 /var/log/rclone_UNGG.log
+#     echo "  - rclone log truncated ✅"
+# else
+#     echo "  - rclone log not found, skipping"
+# fi
+# echo "✅ Log truncation completed"
+# echo ""
 
 # Step 3: Remove old compressed logs
 echo "🗜️ STEP 3: Removing old compressed logs..."
@@ -112,6 +112,9 @@ sudo apt autoremove --purge -y
 echo "Cleaning package cache..."
 sudo apt autoclean
 echo "✅ APT cleanup completed"
+echo ""
+sudo apt clean
+echo "🧹 APT cleansing completed"
 echo ""
 
 # Step 6: Clean old kernel configs
@@ -154,7 +157,7 @@ calculate_space_freed $INITIAL_USAGE $FINAL_USAGE
 
 # Show top disk usage after cleanup
 echo "📊 Top disk usage after cleanup:"
-sudo du -h --max-depth=2 / 2>/dev/null | grep -E '^[0-9.]+[GM]' | sort -rh | head -10
+sudo du -hx --max-depth=2 / 2>/dev/null | grep -E '^[0-9.]+[GM]' | sort -rh | head -10
 echo ""
 
 echo "✅ System cleanup completed successfully!"
